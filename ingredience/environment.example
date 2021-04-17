@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Update the variables to match your environment
+CAS_ENDPOINT="https://<vra-fqdn>"
+CAS_USERNAME="<vra-username>"
+CAS_PASSWORD="<vra-password"
+
+#    ***************************************************************************
+#    ********************        Retrieve API Token         ********************
+#    ***************************************************************************
+
+# Request API Token
+ACCESS_TOKEN=`curl --noproxy '*' \
+--silent \
+--insecure \
+--request POST \
+--header 'Content-Type: application/json' \
+--data '{
+"username": "'"$CAS_USERNAME"'",
+"password": "'"$CAS_PASSWORD"'"
+}' \
+"${CAS_ENDPOINT}/csp/gateway/am/api/login?access_token" \
+| jq -r .access_token`
+
+# Debug: Verify API Token
+# echo $API_TOKEN
+
+export CAS_ENDPOINT && echo "CAS API Endpoint exported successfully"
+export ACCESS_TOKEN && echo "Access Token exported sucessfully"
