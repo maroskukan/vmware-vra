@@ -5,6 +5,13 @@
   - [Documentation](#documentation)
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
     - [Authentication](#authentication)
+    - [About](#about)
+    - [Cloud Account](#cloud-account)
+    - [Fabric Network](#fabric-network)
+    - [Network](#network)
+    - [Network Profile](#network-profile)
+    - [Organization](#organization)
+    - [Miscellaneous](#miscellaneous)
 
 
 ## Introduction
@@ -37,3 +44,198 @@ echo $ACCESS_TOKEN
 ```
 
 This script will generate an environemnt variable `ACCESS_TOKEN` that will be used for authenticating all API requests.
+
+### About
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+"${CAS_ENDPOINT}/iaas/api/about" \
+| jq -r .
+```
+
+### Cloud Account
+
+Get cloud accounts
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/cloud-accounts \
+| jq -r .
+```
+
+Get vSphere cloud accounts
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/cloud-accounts-vsphere \
+| jq -r .
+```
+
+Get NSX-T cloud accounts
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/cloud-accounts-nsx-t \
+| jq -r .
+```
+
+### Fabric Network
+
+Get fabric networks
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/fabric-networks/ \
+| jq -r .
+```
+
+Get fabric network with a given by id.
+```bash
+# Set Id
+ID="82004918-eb6e-4a0b-aaa5-9e9eec254782"
+
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/fabric-networks/${ID} \
+| jq -r .
+```
+
+### Network
+
+Get network domains
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/network-domains \
+| jq -r .
+```
+
+Get networks
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/networks \
+| jq -r .
+```
+
+Get networks with jq output filter
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/networks \
+| jq -r '.content[] | {cidr: .cidr, name: .name,}'
+```
+
+### Network Profile
+
+Get network profiles
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/network-profiles \
+| jq -r .
+```
+
+Get network profile by id
+
+```bash
+# Set Id
+ID="09311f12-16ab-4986-8fd1-e09f6fa77843"
+
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/network-profiles/${ID} \
+| jq -r .
+```
+
+Get network profiles with jq output filter
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/network-profiles \
+| jq -r '.content[] | {name: .name, isolationType: .isolationType, isolationNetworkDomainCIDR: .isolationNetworkDomainCIDR}'
+```
+
+### Organization
+
+Retrieve User Organization ID
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "csp-auth-token: ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/csp/gateway/am/api/loggedin/user/orgs \
+| jq -r .refLinks[]
+```
+
+### Miscellaneous
+
+```bash
+#    ***************************************************************************
+#    ********************     Retrieve Swagger Definition   ********************
+#    ***************************************************************************
+curl --noproxy '*' \
+--silent \
+--insecure \
+${CAS_ENDPOINT}/iaas/api/swagger \
+| jq -r .
+```
