@@ -6,7 +6,9 @@
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
     - [vRA Authentication (on-prem)](#vra-authentication-on-prem)
     - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
-    - [About](#about)
+- [Set the vRA Cloud URL](#set-the-vra-cloud-url)
+- [Generate Access Token](#generate-access-token)
+- [Optionally verify content of Endpoint and Token](#optionally-verify-content-of-endpoint-and-token)
     - [Cloud Account](#cloud-account)
     - [Fabric Network](#fabric-network)
     - [Network](#network)
@@ -25,6 +27,7 @@ The following document describes the usage of VMware vRealize Automation Cloud A
 - [vRealize Automation Cloud API Programming Guide](https://code.vmware.com/docs/11049/vrealize-automation-api-programming-guide)
 - [vRealize Automation 8.4 API Programming Guide](https://code.vmware.com/docs/13520/vrealize-automation-8-4-api-programming-guide)
 - [vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
+- [Request Timing](https://blog.cloudflare.com/a-question-of-timing/)
 
 
 ## VMware Cloud Assembly IaaS API
@@ -65,6 +68,18 @@ VRAC_API_TOKEN="<your-api-token>"
 
 Generate Access token.
 ```bash
+# Optionally find closes API endpoint
+# endpoint name endpoint latency in seconds
+bash 'ingredients/get_cas_endpoints.sh'
+api.mgmt.cloud.vmware.com 0.919832
+au.api.mgmt.cloud.vmware.com 1.458660
+ca.api.mgmt.cloud.vmware.com 1.282106
+de.api.mgmt.cloud.vmware.com 0.300723
+jp.api.mgmt.cloud.vmware.com 1.189917
+sg.api.mgmt.cloud.vmware.com 0.935056
+```
+
+
 # Set the vRA Cloud URL
 CAS_ENDPOINT="https://api.mgmt.cloud.vmware.com"
 
