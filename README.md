@@ -4,7 +4,8 @@
   - [Introduction](#introduction)
   - [Documentation](#documentation)
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
-    - [Authentication](#authentication)
+    - [vRA Authentication (on-prem)](#vra-authentication-on-prem)
+    - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
     - [About](#about)
     - [Cloud Account](#cloud-account)
     - [Fabric Network](#fabric-network)
@@ -20,15 +21,15 @@ The following document describes the usage of VMware vRealize Automation Cloud A
 
 ## Documentation
 
-[vRA API Docs](https://code.vmware.com/docs/13205/vrealize-automation-8-3-api-programming-guide)
-[vRA API Overview](https://blogs.vmware.com/management/2021/02/vra-cloud-assembly-iaas-api.html)
-[Authentication](https://code.vmware.com/docs/13205/vrealize-automation-8-3-api-programming-guide/GUID-AC1E4407-6139-412A-B4AA-1F102942EA94.html)
-[vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
+- [vRA Clooud Assembly API](https://blogs.vmware.com/management/2021/02/vra-cloud-assembly-iaas-api.html)
+- [vRealize Automation Cloud API Programming Guide](https://code.vmware.com/docs/11049/vrealize-automation-api-programming-guide)
+- [vRealize Automation 8.4 API Programming Guide](https://code.vmware.com/docs/13520/vrealize-automation-8-4-api-programming-guide)
+- [vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
 
 
 ## VMware Cloud Assembly IaaS API
 
-### Authentication
+### vRA Authentication (on-prem)
 
 Most of the API calls require a token in Authorization header to be present in the request. You can this token by authenticating with username and password first.
 
@@ -44,6 +45,46 @@ echo $ACCESS_TOKEN
 ```
 
 This script will generate an environemnt variable `ACCESS_TOKEN` that will be used for authenticating all API requests.
+
+### vRA Cloud Authentication (SaaS)
+
+Authentication for SaaS offering works differently than the on-prem solution. In order to generate **Access Token** you need to first create an **API Token**. 
+1. Authenticate using your VMware Account at [vRA Cloud web portal](https://console.cloud.vmware.com/csp/gateway/discovery)
+2. If you are member of multiple organizations, make sure the right one is selected
+3. Navigate to **My Account** and click **API Tokens** tab
+4. Click **GENERATE A NEW API TOKEN**
+   1. Enter Token Name
+   2. Under Organization Roles, select **Organization Owner**
+   3. Under Service Roles, select **VMware Cloud Assemby Administrator** and **Service Broker Administrator**
+5. Click **Generate**
+
+Save token in environemnt variable, it will be next step.
+```bash
+VRAC_API_TOKEN="<your-api-token>"
+```
+
+Generate Access token.
+```bash
+# Set the vRA Cloud URL
+CAS_ENDPOINT="https://api.mgmt.cloud.vmware.com"
+
+# Generate Access Token
+ACCESS_TOKEN=`curl --noproxy '*' \
+--silent \
+--request POST \
+--header 'Content-Type: application/json' \
+--data '{
+"refreshToken": "'"$VRAC_API_TOKEN"'"
+}' \
+"${CAS_ENDPOINT}/iaas/api/login" \
+| jq -r .token`
+
+# Optionally verify content of Endpoint and Token
+echo $CAS_ENDPOINT
+echo $ACCESS_TOKEN
+```
+
+After 25 minutes of inactivity, the access token times out and you must request it again.
 
 ### About
 
