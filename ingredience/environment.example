@@ -9,8 +9,8 @@ CAS_PASSWORD="<vra-password"
 #    ********************        Retrieve API Token         ********************
 #    ***************************************************************************
 
-# Request API Token
-ACCESS_TOKEN=`curl --noproxy '*' \
+# Create generic request
+curl --noproxy '*' \
 --silent \
 --insecure \
 --request POST \
@@ -20,10 +20,26 @@ ACCESS_TOKEN=`curl --noproxy '*' \
 "password": "'"$CAS_PASSWORD"'"
 }' \
 "${CAS_ENDPOINT}/csp/gateway/am/api/login?access_token" \
-| jq -r .access_token`
+--output site.output \
+--write-out %{http_code} \
+  > http.response.code 2> error.messages
 
-# Debug: Verify API Token
-# echo $API_TOKEN
+# Capture exit code from curl
+errorLevel=$?
 
-export CAS_ENDPOINT && echo "CAS API Endpoint exported successfully"
-export ACCESS_TOKEN && echo "Access Token exported sucessfully"
+# Based on HTTP Return code, do required action
+if [[ "$(cat http.response.code)" = 200 ]] ; then
+    # HTTP 200 - OK  Extract the access token from output and cleanup
+    ACCESS_TOKEN=$(jq -r .access_token site.output)
+    export CAS_ENDPOINT && echo "CAS API Endpoint exported successfully"
+    export ACCESS_TOKEN && echo "Access Token exported sucessfully"
+    rm -r site.output http.response.code error.messages
+elif [[ "$(cat http.response.code)" = 000 ]] ; then
+    # HTTP 000 - No code was received, therefore curl exit status is displayed
+    echo "Error: Curl error code $errorLevel"
+    rm -r http.response.code error.messages
+else
+    # HTTP Other response, print response and output, do not clean
+    echo "Error: HTTP Status code $(cat http.response.code)"
+    jq -r . site.output
+fi
