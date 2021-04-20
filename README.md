@@ -32,11 +32,11 @@ The following document describes the usage of VMware vRealize Automation Cloud A
 
 Most of the API calls require a token in Authorization header to be present in the request. You can this token by authenticating with username and password first.
 
-Rename the `environment.example` file to `environment.sh` file in `ingredience` and update content to reflect your particular environment. Load the variables from this script using the `source` shell built in. 
+Rename the `environment.example` file to `environment.sh` file in `ingredients` and update content to reflect your particular environment. Load the variables from this script using the `source` shell built in. 
 
 ```bash
 # Load environment script
-. ingredience/environment.sh
+. ingredients/environment.sh
 
 # Optionally verify content of Endpoint and Token
 echo $CAS_ENDPOINT
