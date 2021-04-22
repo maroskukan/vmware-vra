@@ -6,9 +6,7 @@
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
     - [vRA Authentication (on-prem)](#vra-authentication-on-prem)
     - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
-- [Set the vRA Cloud URL](#set-the-vra-cloud-url)
-- [Generate Access Token](#generate-access-token)
-- [Optionally verify content of Endpoint and Token](#optionally-verify-content-of-endpoint-and-token)
+    - [About](#about)
     - [Cloud Account](#cloud-account)
     - [Fabric Network](#fabric-network)
     - [Network](#network)
@@ -79,11 +77,12 @@ jp.api.mgmt.cloud.vmware.com 1.189917
 sg.api.mgmt.cloud.vmware.com 0.935056
 ```
 
-
+```bash
 # Set the vRA Cloud URL
 CAS_ENDPOINT="https://api.mgmt.cloud.vmware.com"
 
 # Generate Access Token
+
 ACCESS_TOKEN=`curl --noproxy '*' \
 --silent \
 --request POST \
