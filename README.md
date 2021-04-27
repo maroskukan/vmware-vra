@@ -17,7 +17,7 @@
 
 ## Introduction
 
-The following document describes the usage of VMware vRealize Automation Cloud Assembly IaaS REST API Interface. The following calls were tested with version 8.3.
+The following document describes the usage of VMware vRealize Automation Cloud Assembly IaaS REST API Interface. The API calls were tested with version 8.3.
 
 ## Documentation
 
@@ -26,7 +26,6 @@ The following document describes the usage of VMware vRealize Automation Cloud A
 - [vRealize Automation 8.4 API Programming Guide](https://code.vmware.com/docs/13520/vrealize-automation-8-4-api-programming-guide)
 - [vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
 - [Request Timing](https://blog.cloudflare.com/a-question-of-timing/)
-
 
 ## VMware Cloud Assembly IaaS API
 
@@ -284,13 +283,23 @@ ${CAS_ENDPOINT}/csp/gateway/am/api/loggedin/user/orgs \
 
 ### Miscellaneous
 
+Retrieve API version and Documentation link.
+
 ```bash
-#    ***************************************************************************
-#    ********************     Retrieve Swagger Definition   ********************
-#    ***************************************************************************
+# Example for vRA Cloud
+baseUrl="https://api.mgmt.cloud.vmware.com"
+swaggerUrl=`curl --noproxy \
+     --silent \
+     https://api.mgmt.cloud.vmware.com/iaas/api/about \
+     | jq -r '.supportedApis[0].documentationLink'`
+```
+
+Retrieve API documentation.
+
+```bash
 curl --noproxy '*' \
 --silent \
 --insecure \
-${CAS_ENDPOINT}/iaas/api/swagger \
+${baseUrl}${swaggerUrl} \
 | jq -r .
 ```
