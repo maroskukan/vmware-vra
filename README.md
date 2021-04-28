@@ -4,6 +4,7 @@
   - [Introduction](#introduction)
   - [Documentation](#documentation)
   - [Postman Collection](#postman-collection)
+  - [Python Recipes](#python-recipes)
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
     - [vRA Authentication (on-prem)](#vra-authentication-on-prem)
     - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
@@ -29,6 +30,7 @@ The following document describes the usage of VMware vRealize Automation Cloud A
 - [vRealize Automation Cloud Swagger API Documentation](https://www.mgmt.cloud.vmware.com/iaas/api/swagger/ui/)
 - [vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
 - [Request Timing](https://blog.cloudflare.com/a-question-of-timing/)
+- [Pretty Table](https://zetcode.com/python/prettytable/)
 
 
 ## Postman Collection
@@ -41,6 +43,14 @@ In order to get started, you need to populate the following collection variables
 - `CAS_PASSWORD` for vRA on-prem or `CAS_API_TOKEN` for vRA Cloud
 
 In regards, to the `apiVersion`, the initial value is set to `2019-01-15`. Although it is not mandatory to include it with each request, it is highly recommended for future backward compatibility.
+
+## Python Recipes
+
+The repipes folder contains example code that leverages **requests** library to interact with vRealize Automation Cloud API.
+
+In general, it loads `CAS_ENDPOINT` and `CAS_API_TOKEN` OS environment variables and stores them as python variables used as input for Bearer token generation function.
+
+This function is then nested in other functions such as `get_cloud_accounts()` which retrieves and prints result using `prettytable` library.
 
 
 ## VMware Cloud Assembly IaaS API
