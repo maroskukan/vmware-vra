@@ -3,6 +3,7 @@
 - [VMware vRealize Automation](#vmware-vrealize-automation)
   - [Introduction](#introduction)
   - [Documentation](#documentation)
+  - [Postman Collection](#postman-collection)
   - [VMware Cloud Assembly IaaS API](#vmware-cloud-assembly-iaas-api)
     - [vRA Authentication (on-prem)](#vra-authentication-on-prem)
     - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
@@ -19,15 +20,32 @@
 
 The following document describes the usage of VMware vRealize Automation Cloud Assembly IaaS REST API Interface. The API calls were tested with version 8.3.
 
+
 ## Documentation
 
-- [vRA Clooud Assembly API](https://blogs.vmware.com/management/2021/02/vra-cloud-assembly-iaas-api.html)
+- [vRA Cloud Assembly API](https://blogs.vmware.com/management/2021/02/vra-cloud-assembly-iaas-api.html)
 - [vRealize Automation Cloud API Programming Guide](https://code.vmware.com/docs/11049/vrealize-automation-api-programming-guide)
 - [vRealize Automation 8.4 API Programming Guide](https://code.vmware.com/docs/13520/vrealize-automation-8-4-api-programming-guide)
+- [vRealize Automation Cloud Swagger API Documentation](https://www.mgmt.cloud.vmware.com/iaas/api/swagger/ui/)
 - [vRA API Python](https://www.thehumblelab.com/vrealize-automation-api-with-python/)
 - [Request Timing](https://blog.cloudflare.com/a-question-of-timing/)
 
+
+## Postman Collection
+
+I have leveraged the publicly available **vRealize Automation Cloud Swagger API Documentation** in order to create a postman colleclection. The collection contains multiple folders such as `Authentication` and `IAAS`.
+
+In order to get started, you need to populate the following collection variables with your specific environment:
+- `CAS_ENDPOINT`
+- `CAS_USERNAME`
+- `CAS_PASSWORD` for vRA on-prem or `CAS_API_TOKEN` for vRA Cloud
+
+In regards, to the `apiVersion`, the initial value is set to `2019-01-15`. Although it is not mandatory to include it with each request, it is highly recommended for future backward compatibility.
+
+
 ## VMware Cloud Assembly IaaS API
+
+The following section explains how authentication works for vRA and for vRA Cloud as well as sample REST API calls using `curl`.
 
 ### vRA Authentication (on-prem)
 

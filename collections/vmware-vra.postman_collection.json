@@ -1,0 +1,1137 @@
+{
+	"info": {
+		"_postman_id": "c8d8feae-a099-4bac-af9e-df77bdb5c340",
+		"name": "vmware-vra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "vRAC - Get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the API Response as a variable\r",
+									"let response = pm.response.json();\r",
+									"\r",
+									"// Store token value as collection variable\r",
+									"pm.collectionVariables.set(\"CAS_ACCESS_TOKEN\", response.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"{{CAS_API_TOKEN}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAS_ENDPOINT}}/iaas/api/login",
+							"host": [
+								"{{CAS_ENDPOINT}}"
+							],
+							"path": [
+								"iaas",
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vRA - Get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the API Response as a variable\r",
+									"let response = pm.response.json();\r",
+									"\r",
+									"// Store access_token value as collection variable\r",
+									"pm.collectionVariables.set(\"CAS_ACCESS_TOKEN\", response.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": {{CAS_USERNAME}},\r\n    \"password\": {{CAS_PASSWORD}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAS_ENDPOINT}}/csp/gateway/am/api/login?access_token",
+							"host": [
+								"{{CAS_ENDPOINT}}"
+							],
+							"path": [
+								"csp",
+								"gateway",
+								"am",
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IAAS",
+			"item": [
+				{
+					"name": "About",
+					"item": [
+						{
+							"name": "Set API version",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store latestApiVersion value as collection variable\r",
+											"pm.collectionVariables.set(\"apiVersion\", response.latestApiVersion);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/about",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"about"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cloud Account",
+					"item": [
+						{
+							"name": "Get cloud accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get VMC cloud accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts-vmc?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts-vmc"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Azure cloud accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts-azure?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts-azure"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get vSphere cloud accounts Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts-vsphere?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts-vsphere"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get NSX-T cloud accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts-nsx-t?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts-nsx-t"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get AWS cloud accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/cloud-accounts-aws?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"cloud-accounts-aws"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Compute",
+					"item": [
+						{
+							"name": "Get machines",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"MachineId\", response.content[0].id);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/machines?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"machines"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get machine",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/machines/{{MachineId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"machines",
+										"{{MachineId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get machine disks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"MachineDiskId\", response.content[0].id);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/machines/{{MachineId}}/disks?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"machines",
+										"{{MachineId}}",
+										"disks"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get machine disk",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/machines/{{MachineId}}/disks/{{MachineDiskId}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"machines",
+										"{{MachineId}}",
+										"disks",
+										"{{MachineDiskId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Deployment",
+					"item": [
+						{
+							"name": "Get Deployments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"DeploymentId\", response.content[0].id);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/deployments?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"deployments"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Deployment",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/deployments/{{DeploymentId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"deployments",
+										"{{DeploymentId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Disk",
+					"item": [
+						{
+							"name": "Get BlockDevices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						},
+						{
+							"name": "Get BlockDevice",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fabric Flavors",
+					"item": [
+						{
+							"name": "Get fabric flavors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/fabric-flavors?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"fabric-flavors"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fabric Images",
+					"item": [
+						{
+							"name": "Get fabric images",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"FabricImageId\", response.content[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/fabric-images?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"fabric-images"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get fabric image",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/fabric-images/{{FabricImageId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"fabric-images",
+										"{{FabricImageId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fabric Network",
+					"item": [
+						{
+							"name": "Get fabric networks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"FabricNetworkId\", response.content[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/fabric-networks?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"fabric-networks"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get fabric network",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/fabric-networks/{{FabricNetworkId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"fabric-networks",
+										"{{FabricNetworkId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Flavors",
+					"item": [
+						{
+							"name": "Get flavors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/flavors?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"flavors"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Images",
+					"item": [
+						{
+							"name": "Get images",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/images?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"images"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project",
+					"item": [
+						{
+							"name": "Get projects",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"ProjectId\", response.content[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/projects?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"projects"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get project",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/projects/{{ProjectId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"projects",
+										"{{ProjectId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tags",
+					"item": [
+						{
+							"name": "Get tags",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/tags?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"tags"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Security Group",
+					"item": [
+						{
+							"name": "Get Security groups",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"SecurityGroupId\", response.content[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/security-groups?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"security-groups"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Security group",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/security-groups/{{SecurityGroupId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"security-groups",
+										"{{SecurityGroupId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Network Profile",
+					"item": [
+						{
+							"name": "Get network profiles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Save the API Response as a variable\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"// Store id for first object in the JSON array\r",
+											"pm.collectionVariables.set(\"NetworkProfileId\", response.content[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/network-profiles?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"network-profiles"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get network profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CAS_ENDPOINT}}/iaas/api/network-profiles/{{NetworkProfileId}}?apiVersion={{apiVersion}}",
+									"host": [
+										"{{CAS_ENDPOINT}}"
+									],
+									"path": [
+										"iaas",
+										"api",
+										"network-profiles",
+										"{{NetworkProfileId}}"
+									],
+									"query": [
+										{
+											"key": "apiVersion",
+											"value": "{{apiVersion}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{CAS_ACCESS_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CAS_ENDPOINT",
+			"value": ""
+		},
+		{
+			"key": "CAS_USERNAME",
+			"value": ""
+		},
+		{
+			"key": "CAS_PASSWORD",
+			"value": ""
+		},
+		{
+			"key": "CAS_API_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "CAS_ACCESS_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "FabricImageId",
+			"value": ""
+		},
+		{
+			"key": "FabricNetworkId",
+			"value": ""
+		},
+		{
+			"key": "apiVersion",
+			"value": "2019-01-15"
+		},
+		{
+			"key": "ProjectId",
+			"value": ""
+		},
+		{
+			"key": "SecurityGroupId",
+			"value": ""
+		},
+		{
+			"key": "DeploymentId",
+			"value": ""
+		},
+		{
+			"key": "NetworkProfileId",
+			"value": ""
+		},
+		{
+			"key": "MachineId",
+			"value": ""
+		},
+		{
+			"key": "MachineDiskId",
+			"value": ""
+		},
+		{
+			"key": "BlockDeviceId",
+			"value": ""
+		}
+	]
+}
