@@ -4,6 +4,7 @@
 CAS_ENDPOINT="https://<vra-fqdn>"
 CAS_USERNAME="<vra-username>"
 CAS_PASSWORD="<vra-password"
+CAS_API_TOKEN="<vrac-api-token>"
 
 #    ***************************************************************************
 #    ********************        Retrieve API Token         ********************
