@@ -10,6 +10,8 @@
     - [vRA Cloud Authentication (SaaS)](#vra-cloud-authentication-saas)
     - [About](#about)
     - [Cloud Account](#cloud-account)
+      - [Filtering output - array](#filtering-output---array)
+      - [Filtering output - list](#filtering-output---list)
     - [Fabric Network](#fabric-network)
     - [Network](#network)
     - [Network Profile](#network-profile)
@@ -88,7 +90,7 @@ Authentication for SaaS offering works differently than the on-prem solution. In
 
 Save token in environemnt variable, it will be next step.
 ```bash
-VRAC_API_TOKEN="<your-api-token>"
+CAS_API_TOKEN="<your-api-token>"
 ```
 
 Generate Access token.
@@ -115,7 +117,7 @@ ACCESS_TOKEN=`curl --noproxy '*' \
 --request POST \
 --header 'Content-Type: application/json' \
 --data '{
-"refreshToken": "'"$VRAC_API_TOKEN"'"
+"refreshToken": "'"$CAS_API_TOKEN"'"
 }' \
 "${CAS_ENDPOINT}/iaas/api/login" \
 | jq -r .token`
@@ -140,7 +142,7 @@ curl --noproxy '*' \
 
 ### Cloud Account
 
-Get cloud accounts
+Get cloud accounts. Display `content` in JSON output.
 
 ```bash
 curl --noproxy '*' \
@@ -152,6 +154,68 @@ curl --noproxy '*' \
 ${CAS_ENDPOINT}/iaas/api/cloud-accounts \
 | jq -r .
 ```
+
+#### Filtering output - array
+
+Get cloud accounts. Display only `name`, `hostname`, `type`, `version` and `creator`.
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/cloud-accounts \
+| jq -r '.content[] | {name: .name, 
+                       hostName: .cloudAccountProperties.hostName, 
+                       cloudAccountType: .cloudAccountType,
+                       version: .customProperties.version,
+                       createdByEmail: .customProperties.createdByEmail}'
+```
+
+Sample output from last request.
+```json
+{
+  "name": "nsx-mgr.example.com",
+  "hostName": "10.200.147.15",
+  "cloudAccountType": "nsxt",
+  "version": "2.5.0.0.0",
+  "createdByEmail": "maros.kukan@domain.com"
+}
+{
+  "name": "vc.example.com",
+  "hostName": "10.200.147.5",
+  "cloudAccountType": "vsphere",
+  "version": "6.7.0",
+  "createdByEmail": "maros.kukan@domain.com"
+}
+```
+
+#### Filtering output - list
+
+```bash
+curl --noproxy '*' \
+--silent \
+--insecure \
+--request GET \
+--insecure \
+--header "Authorization: Bearer ${ACCESS_TOKEN}" \
+${CAS_ENDPOINT}/iaas/api/cloud-accounts \
+| jq -r '.content[] | [.name, 
+                       .cloudAccountProperties.hostName, 
+                       .cloudAccountType,
+                       .customProperties.version,
+                       .customProperties.createdByEmail] 
+                    | @csv'
+```
+
+Sample output from last request
+```csv
+"nsx-mgr.example.com","10.200.147.15","nsxt","2.5.0.0.0","maros.kukan@domain.com"
+"vc.example.com","10.200.147.5","vsphere","6.7.0","maros.kukan@domain.com"
+```
+
 
 Get vSphere cloud accounts
 
