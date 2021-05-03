@@ -4,9 +4,10 @@ from os import environ
 
 
 # Get Environment variables
-fqdn = environ.get('CAS_ENDPOINT')
-refreshtoken = environ.get('CAS_API_TOKEN')
-
+def load_creds():
+    fqdn = environ.get('CAS_ENDPOINT')
+    refreshtoken = environ.get('CAS_API_TOKEN')
+    return fqdn, refreshtoken
 
 # vRealize Automation Cloud - Generate Access (Bearer) Token
 def vrac_auth(fqdn,refreshtoken):
@@ -43,13 +44,23 @@ def get_cloud_accounts(fqdn,auth):
                     element['customProperties']['createdByEmail']))
     return print(pt)
 
-# Call function
-get_cloud_accounts(fqdn,vrac_auth(fqdn,refreshtoken))
 
-# Example output
-# +---------------------+---------------+---------+-----------+------------------------+
-# | Name                | Hostname      | Type    | Version   | Creator                |
-# +---------------------+---------------+---------+-----------+------------------------+
-# | nsx-mgr.example.com | 10.200.147.15 | nsxt    | 2.5.0.0.0 | maros.kukan@domain.com |
-# | vc.example.com      | 10.200.147.5  | vsphere | 6.7.0     | maros.kukan@domain.com |
-# +---------------------+---------------+---------+-----------+------------------------+ 
+# Main function
+def main():
+    # Load credentials
+    fqdn, refreshtoken = load_creds()
+
+    # Call function
+    get_cloud_accounts(fqdn,vrac_auth(fqdn,refreshtoken))
+
+    # Example output
+    # +---------------------+---------------+---------+-----------+------------------------+
+    # | Name                | Hostname      | Type    | Version   | Creator                |
+    # +---------------------+---------------+---------+-----------+------------------------+
+    # | nsx-mgr.example.com | 10.200.147.15 | nsxt    | 2.5.0.0.0 | maros.kukan@domain.com |
+    # | vc.example.com      | 10.200.147.5  | vsphere | 6.7.0     | maros.kukan@domain.com |
+    # +---------------------+---------------+---------+-----------+------------------------+
+
+
+if __name__ == "__main__":
+    main()
