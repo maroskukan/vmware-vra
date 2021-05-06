@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c8d8feae-a099-4bac-af9e-df77bdb5c340",
+		"_postman_id": "40b23017-8735-4f97-8056-bbb95432a741",
 		"name": "vmware-vra",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,6 +15,14 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"// Basic Tests\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
 									"// Save the API Response as a variable\r",
 									"let response = pm.response.json();\r",
 									"\r",
@@ -58,6 +66,14 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"// Basic Tests\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
 									"// Save the API Response as a variable\r",
 									"let response = pm.response.json();\r",
 									"\r",
@@ -117,6 +133,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -154,6 +178,23 @@
 					"item": [
 						{
 							"name": "Get cloud accounts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -179,6 +220,23 @@
 						},
 						{
 							"name": "Get VMC cloud accounts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -204,6 +262,23 @@
 						},
 						{
 							"name": "Get Azure cloud accounts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -229,6 +304,23 @@
 						},
 						{
 							"name": "Get vSphere cloud accounts Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -254,6 +346,23 @@
 						},
 						{
 							"name": "Get NSX-T cloud accounts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -279,6 +388,23 @@
 						},
 						{
 							"name": "Get AWS cloud accounts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -302,6 +428,26 @@
 							},
 							"response": []
 						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
 					]
 				},
 				{
@@ -314,6 +460,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -350,6 +504,23 @@
 						},
 						{
 							"name": "Get machine",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -381,6 +552,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -419,6 +598,23 @@
 						},
 						{
 							"name": "Get machine disk",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -451,6 +647,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -487,6 +691,23 @@
 						},
 						{
 							"name": "Get Deployment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -511,6 +732,32 @@
 							},
 							"response": []
 						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Basic Tests",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});"
+								]
+							}
+						}
 					]
 				},
 				{
@@ -518,10 +765,29 @@
 					"item": [
 						{
 							"name": "Get BlockDevices",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -530,7 +796,9 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -541,6 +809,23 @@
 					"item": [
 						{
 							"name": "Get fabric flavors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -576,6 +861,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -615,7 +908,13 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											""
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -656,6 +955,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -691,6 +998,23 @@
 						},
 						{
 							"name": "Get fabric network",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -722,6 +1046,23 @@
 					"item": [
 						{
 							"name": "Get flavors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -751,6 +1092,23 @@
 					"item": [
 						{
 							"name": "Get images",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -786,6 +1144,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -821,6 +1187,23 @@
 						},
 						{
 							"name": "Get project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -852,6 +1235,23 @@
 					"item": [
 						{
 							"name": "Get tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -887,6 +1287,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -922,6 +1330,23 @@
 						},
 						{
 							"name": "Get Security group",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -958,6 +1383,14 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Basic Tests\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
 											"// Save the API Response as a variable\r",
 											"let response = pm.response.json();\r",
 											"\r",
@@ -993,6 +1426,23 @@
 						},
 						{
 							"name": "Get network profile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Basic Tests",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Status code name has string\", function () {",
+											"    pm.response.to.have.status(\"OK\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
