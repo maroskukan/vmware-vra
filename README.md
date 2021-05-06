@@ -93,7 +93,8 @@ Save token in environemnt variable, it will be next step.
 CAS_API_TOKEN="<your-api-token>"
 ```
 
-Generate Access token.
+Optionally, measure you latency to API endpoints.
+
 ```bash
 # Optionally find closes API endpoint
 # endpoint name endpoint latency in seconds
@@ -181,14 +182,14 @@ Sample output from last request.
   "hostName": "10.200.147.15",
   "cloudAccountType": "nsxt",
   "version": "2.5.0.0.0",
-  "createdByEmail": "maros.kukan@domain.com"
+  "createdByEmail": "maros.kukan@example.com"
 }
 {
   "name": "vc.example.com",
   "hostName": "10.200.147.5",
   "cloudAccountType": "vsphere",
   "version": "6.7.0",
-  "createdByEmail": "maros.kukan@domain.com"
+  "createdByEmail": "maros.kukan@example.com"
 }
 ```
 
@@ -212,8 +213,8 @@ ${CAS_ENDPOINT}/iaas/api/cloud-accounts \
 
 Sample output from last request
 ```csv
-"nsx-mgr.example.com","10.200.147.15","nsxt","2.5.0.0.0","maros.kukan@domain.com"
-"vc.example.com","10.200.147.5","vsphere","6.7.0","maros.kukan@domain.com"
+"nsx-mgr.example.com","10.200.147.15","nsxt","2.5.0.0.0","maros.kukan@example.com"
+"vc.example.com","10.200.147.5","vsphere","6.7.0","maros.kukan@example.com"
 ```
 
 
